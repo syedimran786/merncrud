@@ -1,1 +1,3 @@
 # merncrud
+
+# Clone the project
