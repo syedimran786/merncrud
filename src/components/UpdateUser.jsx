@@ -19,7 +19,7 @@ function UpdateUser() {
 
         try
         {
-            let {data}=await axios.put(`http://localhost:3000/users/${userData.id}`,userData);
+            let {data}=await axios.put(`http://localhost:4500/student/updatestudent/${userData._id}`,userData);
             console.log(data);
             notify();
             setuserData({fullname:"",email:"",age:"",gender:""})
@@ -34,7 +34,7 @@ function UpdateUser() {
 useEffect(()=>
 {
     let lsData=JSON.parse(localStorage.getItem("user"));
-    setuserData({...userData,...lsData})
+    setuserData({...userData,...lsData.student})
 },[])
  
     return (

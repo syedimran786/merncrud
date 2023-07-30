@@ -16,8 +16,9 @@ function GetUsers() {
 
 
         try {
-            let { data } = await axios.get("http://localhost:3000/users");
-            setUsers(data)
+            let { data } = await axios.get("http://localhost:4500/student/getstudents");
+           console.log(data);
+            setUsers(data.students)
         }
         catch (err) {
             console.log(err);
@@ -33,7 +34,7 @@ function GetUsers() {
         let ok = confirm("Do you want to delete")
         if (ok === true) {
             try {
-                let { data } = await axios.delete(`http://localhost:3000/users/${id}`);
+                let { data } = await axios.delete(`http://localhost:4500/student/deletestudent/${id}`);
                 notify("User Deleted")
             }
             catch (err) {
@@ -45,9 +46,9 @@ function GetUsers() {
 
     let updateUser = async (id) => {
         try {
-            let { data } = await axios.get(`http://localhost:3000/users/${id}`);
+            let { data } = await axios.get(`http://localhost:4500/student/getstudentbyid/${id}`);
             localStorage.setItem("user", JSON.stringify(data));
-            navigate("/updateuser/${id}")
+            navigate(`/updateuser/${id}`)
         }
         catch (err) {
             console.log(err);
@@ -81,10 +82,10 @@ function GetUsers() {
                                 <td>{user.age}</td>
                                 <td>{user.gender}</td>
                                 <td>
-                                    <button className='btn btn-primary' onClick={()=>{updateUser(user.id)}}>Update</button>
+                                    <button className='btn btn-primary' onClick={()=>{updateUser(user._id)}}>Update</button>
                                 </td>
                                 <td>
-                                    <button className='btn btn-danger' onClick={() => { deleteuser(user.id) }}>Delete</button>
+                                    <button className='btn btn-danger' onClick={() => { deleteuser(user._id) }}>Delete</button>
                                 </td>
                             </tr>
                         })}
